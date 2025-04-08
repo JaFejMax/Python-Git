@@ -16,7 +16,7 @@ class Estate(Property):
     Estate_types_coef = {
         "land": 0.85,
         "building site": 9,
-        "forrest": 0.35,
+        "forest": 0.35,
         "garden": 2
     }
     def __init__(self, locality, estate_type, area):
@@ -24,7 +24,7 @@ class Estate(Property):
         self.estate_type = estate_type
         self.area = area
 #area v metrech ctverecnich
-    def calculate_tax_estate(self):
+    def calculate_tax(self):
         if self.estate_type not in self.Estate_types_coef:
             print("Neplatný typ pozemku.")  # Nejprve vypíše chybovou zprávu
             return 0
@@ -39,7 +39,7 @@ class Residence(Property):
         super().__init__(locality)
         self.area = area
         self.commercial = commercial
-    def calculate_tax_residence(self):
+    def calculate_tax(self):
         tax_residence = self.area * self.locality.locality_coefficient * 15
         if self.commercial:
             tax_residence = 2*tax_residence
@@ -56,6 +56,6 @@ residence1 = Residence(manetin, 120)  # Dům v Manětíně
 office = Residence(brno, 90, commercial=True)  # Kancelář v Brně
 
 # Výstupy
-print(f"Daň z pozemku: {estate1.calculate_tax_estate()} Kč")  # Očekávaný výstup: 612
-print(f"Daň z domu: {residence1.calculate_tax_residence()} Kč")  # Očekávaný výstup: 1440
-print(f"Daň z kanceláře: {office.calculate_tax_residence()} Kč")  # Očekávaný výstup: 8100
+print(f"Daň z pozemku: {estate1.calculate_tax()} Kč")  # Očekávaný výstup: 612
+print(f"Daň z domu: {residence1.calculate_tax()} Kč")  # Očekávaný výstup: 1440
+print(f"Daň z kanceláře: {office.calculate_tax()} Kč")  # Očekávaný výstup: 8100
